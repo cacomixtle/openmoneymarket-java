@@ -1,0 +1,5 @@
+
+rootProject.name = 'openmoneymarket-java'
+include(
+'dao-fund',
+'testinteg')
