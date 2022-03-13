@@ -27,31 +27,31 @@ public class DaoFund extends Addresses {
 		Context.println(TAG + "| Started Dao Fund:" + Context.getAddress());
 	}
 
-    @EventLog(indexed=1)
-    public void FundReceived(BigInteger _amount, Address _reserve) {}
+	@EventLog(indexed=1)
+	public void FundReceived(BigInteger _amount, Address _reserve) {}
 
-    @External(readonly=true)
-    public String name() {
-        return "Omm "+TAG;
-    }
+	@External(readonly=true)
+	public String name() {
+		return "Omm "+TAG;
+	}
 
-    @External
-    public void transferOmm(BigInteger _value, Address _address) {
-    	onlyGovernance();
-        Address ommAddress = getAddress(OMM_TOKEN);
-        if(ommAddress == null) {
-        	Context.revert(TAG + "| omm address was not set");
-        }
-        Context.call(ommAddress, "transfer", _address, _value);
-    }
+	@External
+	public void transferOmm(BigInteger _value, Address _address) {
+		onlyGovernance();
+		Address ommAddress = getAddress(OMM_TOKEN);
+		if(ommAddress == null) {
+			Context.revert(TAG + "| omm address was not set");
+		}
+		Context.call(ommAddress, "transfer", _address, _value);
+	}
 
-    @External
-    public void tokenFallback(Address _from, BigInteger _value, @Optional byte[] _data) {
-        this.FundReceived(_value, Context.getCaller());
-    }
+	@External
+	public void tokenFallback(Address _from, BigInteger _value, @Optional byte[] _data) {
+		this.FundReceived(_value, Context.getCaller());
+	}
 
-    @Override
-    public String getTag() {
-    	return TAG;
-    }
+	@Override
+	public String getTag() {
+		return TAG;
+	}
 }

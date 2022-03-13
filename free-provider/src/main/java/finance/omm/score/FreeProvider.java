@@ -18,7 +18,7 @@ public class FreeProvider extends Addresses{
 
 	private static final String ORIGINATION_FEE_PERCENT = "originationFeePercent";
 
-    private VarDB<BigInteger> _originationFeePercent = Context.newVarDB(ORIGINATION_FEE_PERCENT, BigInteger.class);
+	private VarDB<BigInteger> _originationFeePercent = Context.newVarDB(ORIGINATION_FEE_PERCENT, BigInteger.class);
 
 	public FreeProvider(Address _addressProvider, @Optional boolean _update) {
 		super(_addressProvider, _update);
@@ -30,43 +30,43 @@ public class FreeProvider extends Addresses{
 		Context.println(TAG + "| Started Free Provider:" + Context.getAddress());
 	}
 
-    @EventLog(indexed=3)
-    public void FeeReceived(Address _from, BigInteger _value, byte[] _data, Address _sender) {}
-    
-    @External
-    public void setLoanOriginationFeePercentage(BigInteger _percentage) {
-    	onlyOwner();
-        this._originationFeePercent.set(_percentage);
-    }
+	@EventLog(indexed=3)
+	public void FeeReceived(Address _from, BigInteger _value, byte[] _data, Address _sender) {}
 
-    @External(readonly=true)
-    public String name() {
-        return "Omm "+TAG;
-    }
+	@External
+	public void setLoanOriginationFeePercentage(BigInteger _percentage) {
+		onlyOwner();
+		this._originationFeePercent.set(_percentage);
+	}
 
-    @External(readonly=true)
-    public BigInteger calculateOriginationFee(BigInteger _amount) {
-        return exaMul(_amount, this.getLoanOriginationFeePercentage());
-    }
+	@External(readonly=true)
+	public String name() {
+		return "Omm "+TAG;
+	}
 
-    @External(readonly=true)
-    public BigInteger getLoanOriginationFeePercentage() {
-        return this._originationFeePercent.get();
-    }
+	@External(readonly=true)
+	public BigInteger calculateOriginationFee(BigInteger _amount) {
+		return exaMul(_amount, this.getLoanOriginationFeePercentage());
+	}
 
-    @External
-    public void tokenFallback(Address _from, BigInteger _value, byte[] _data) {
-        this.FeeReceived(_from, _value, _data, Context.getCaller());
-    }
+	@External(readonly=true)
+	public BigInteger getLoanOriginationFeePercentage() {
+		return this._originationFeePercent.get();
+	}
 
-    @External
-    public void transferFund(Address _token, BigInteger _value, Address _to) {
-    	onlyGovernance();
-        Context.call(_token , "transfer", _to, _value);
-    }
+	@External
+	public void tokenFallback(Address _from, BigInteger _value, byte[] _data) {
+		this.FeeReceived(_from, _value, _data, Context.getCaller());
+	}
+
+	@External
+	public void transferFund(Address _token, BigInteger _value, Address _to) {
+		onlyGovernance();
+		Context.call(_token , "transfer", _to, _value);
+	}
 
 	@Override
 	public String getTag() {
-		return "";
+		return TAG;
 	}
 }

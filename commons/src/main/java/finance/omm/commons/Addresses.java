@@ -47,19 +47,19 @@ public class Addresses extends BaseScore{
 	}
 
 	@External(readonly=true)
-    public Map<String, Address> getAddresses() {
-    	return arrayAndDictDbToMap(contracts, addresses);
-    }
+	public Map<String, Address> getAddresses() {
+		return arrayAndDictDbToMap(contracts, addresses);
+	}
 
-    @External(readonly=true)
-    public Address getAddress(String _name) {
-        return this.addresses.getOrDefault(_name, null);
-    }
+	@External(readonly=true)
+	public Address getAddress(String _name) {
+		return this.addresses.getOrDefault(_name, null);
+	}
 
-    @External(readonly=true)
-    public Address getAddressProvider() {
-        return this.addressProvider.getOrDefault(null);
-    }
+	@External(readonly=true)
+	public Address getAddressProvider() {
+		return this.addressProvider.getOrDefault(null);
+	}
 
 	@Override
 	public String getTag() {

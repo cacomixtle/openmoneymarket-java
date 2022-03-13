@@ -4,15 +4,15 @@ import score.Address;
 
 public class AddressDetails {
 
-    private String name;
-    private Address address;
+	private String name;
+	private Address address;
 
-    public AddressDetails() {}
-    public AddressDetails(String name, Address address) {
-    	this.name = name;
-    	this.address = address;
-    }
-    
+	public AddressDetails() {}
+	public AddressDetails(String name, Address address) {
+		this.name = name;
+		this.address = address;
+	}
+
 	public String getName() {
 		return name;
 	}
