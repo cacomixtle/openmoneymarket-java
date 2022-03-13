@@ -6,11 +6,12 @@ import java.util.Map;
 
 import com.iconloop.score.test.Account;
 
+import finance.omm.commons.Addresses;
 import score.Address;
 import score.Context;
 import score.annotation.External;
 
-public class TestOmmToken{
+public class MockOmmToken{
 
 	private Map<Address, Account> accounts = new HashMap<>();
 	private Account owner;
@@ -32,8 +33,8 @@ public class TestOmmToken{
 
     @External
     public void transfer(Address _to, BigInteger _value) {
-    	//owner.subtractBalance(DaoFund.OMM_TOKEN, _value);
-    	//accounts.get(_to).addBalance(DaoFund.OMM_TOKEN, _value);
+    	owner.subtractBalance(Addresses.OMM_TOKEN, _value);
+    	accounts.get(_to).addBalance(Addresses.OMM_TOKEN, _value);
     	Context.println(name() +"| transferred: " +  _value + " to: " + _to );
     }
 

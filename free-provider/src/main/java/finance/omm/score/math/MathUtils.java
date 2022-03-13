@@ -11,7 +11,7 @@ public final class MathUtils {
 	private static final BigInteger EXA = pow(TEN, 18);
 	private static final BigInteger HALF_EXA = EXA.divide(TWO); 
 
-	private static BigInteger pow(BigInteger base, int exponent) {
+	public static BigInteger pow(BigInteger base, int exponent) {
 		BigInteger result = BigInteger.ONE;
 		for (int i = 0; i < exponent; i++) {
 			result = result.multiply(base);

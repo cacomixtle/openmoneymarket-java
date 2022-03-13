@@ -36,9 +36,8 @@ public class Addresses extends BaseScore{
 	@External
 	public void setAddresses(AddressDetails[] _addressDetails) {
 		onlyAddressProvider();
-		Context.println("details"+_addressDetails);
-
 		for (AddressDetails contract : _addressDetails) {
+			Context.println(getTag() + "| contract : " +contract.getName() + " , address: " + contract.getAddress());
 			if (!containsInArrayDb(contract.getName(), this.contracts)) {
 				this.contracts.add(contract.getName());
 			}

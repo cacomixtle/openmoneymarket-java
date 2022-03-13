@@ -25,6 +25,7 @@ public class WorkerToken {
 	private static final String TOTAL_SUPPLY = "total_supply";
 	private static final String DECIMALS = "decimals";
 	private static final String WALLETS = "wallets";
+	public static final String WORKER_TOKEN_SYMBOL = "OMMWT";
 
 	private VarDB<BigInteger> totalSupply = Context.newVarDB(TOTAL_SUPPLY, BigInteger.class);
 	private VarDB<BigInteger> decimals = Context.newVarDB(DECIMALS, BigInteger.class);
@@ -50,7 +51,7 @@ public class WorkerToken {
 		}
 
 		BigInteger totalSupply = _initialSupply.multiply( pow( TEN , _decimals.intValue()) );
-		Context.println(TAG+" : total_supply "+ totalSupply );
+		Context.println(TAG+"| total_supply "+ totalSupply );
 
 		this.totalSupply.set(totalSupply);
 		this.decimals.set(_decimals);
@@ -72,7 +73,7 @@ public class WorkerToken {
 
 	@External(readonly=true)
 	public String symbol() {
-		return "OMMWT";
+		return WORKER_TOKEN_SYMBOL;
 	}
 
 	@External(readonly=true)
@@ -87,11 +88,11 @@ public class WorkerToken {
 
 	@External(readonly=true)
 	public BigInteger balanceOf(Address _owner) {
-		return this.balances.get(_owner);
+		return this.balances.getOrDefault(_owner, ZERO);
 	}
 
 	@External
-	public  void transfer(Address _to, BigInteger _value, @Optional byte[] _data) {
+	public void transfer(Address _to, BigInteger _value, @Optional byte[] _data) {
 		if (_data == null || _data.length == 0){
 			_data = "None".getBytes();
 		}
@@ -109,6 +110,7 @@ public class WorkerToken {
 			Context.revert(TAG +": Transferring value should be greater than zero");
 		}
 		BigInteger balanceFrom = this.balances.getOrDefault(_from, ZERO);
+		Context.println(TAG + "| transferring: " + _value + " - from sender balance: " + balanceFrom);
 		if ( balanceFrom.compareTo(_value) < 0 ) {
 			Context.revert(TAG +" : Out of balance: "+ _value);
 		}

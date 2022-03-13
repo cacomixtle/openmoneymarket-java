@@ -51,7 +51,7 @@ public class FreeProvider extends Addresses{
 
 	@External(readonly=true)
 	public BigInteger getLoanOriginationFeePercentage() {
-		return this._originationFeePercent.get();
+		return this._originationFeePercent.getOrDefault(BigInteger.ZERO);
 	}
 
 	@External
