@@ -2,6 +2,7 @@ package finance.omm.score;
 
 import java.math.BigInteger;
 
+import finance.omm.commons.Addresses;
 import score.Address;
 import score.Context;
 import score.annotation.EventLog;
@@ -12,7 +13,6 @@ public class DaoFund extends Addresses {
 
 	public static final String TAG = "Dao Fund Manager";
 
-	
 	/**
 	 * _addressProvider: contract address of the provider 
 	 * _update: allow to mimic on update event call, default to false

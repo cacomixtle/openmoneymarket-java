@@ -17,6 +17,8 @@ import com.iconloop.score.test.Score;
 import com.iconloop.score.test.ServiceManager;
 import com.iconloop.score.test.TestBase;
 
+import finance.omm.commons.AddressDetails;
+import finance.omm.commons.Addresses;
 import score.Address;
 
 class DaoFundTest extends TestBase{

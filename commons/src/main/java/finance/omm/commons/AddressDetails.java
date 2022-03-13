@@ -1,4 +1,4 @@
-package finance.omm.score;
+package finance.omm.commons;
 
 import score.Address;
 

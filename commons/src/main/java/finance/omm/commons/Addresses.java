@@ -1,4 +1,4 @@
-package finance.omm.score;
+package finance.omm.commons;
 
 import java.util.Map;
 
@@ -36,6 +36,8 @@ public class Addresses extends BaseScore{
 	@External
 	public void setAddresses(AddressDetails[] _addressDetails) {
 		onlyAddressProvider();
+		Context.println("details"+_addressDetails);
+
 		for (AddressDetails contract : _addressDetails) {
 			if (!containsInArrayDb(contract.getName(), this.contracts)) {
 				this.contracts.add(contract.getName());
